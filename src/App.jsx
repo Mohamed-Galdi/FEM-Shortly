@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       
-      <p className="text-7xl">
+      <p className="text-base font-shortly text-shortly_pr_cyan sm:text-shortly_sec_red bg-shortly_pr_darkViolet border-shortly_sec_red border-2">
         hello from vs code
       </p>
     </>
