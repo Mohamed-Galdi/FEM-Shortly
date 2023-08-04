@@ -1,15 +1,21 @@
+import { useState } from "react";
 function Layout(props) {
+  const [mobileMenu, setMobileMenu] = useState(false)
+  const toggelMobileMenu = () =>{
+    setMobileMenu(!mobileMenu)
+  }
+
   return (
     <>
       <div className="font-shortly">
         {/* --------------------------------------------- Header -------------------------------------- */}
 
-        <header className="mx-auto max-w-screen-lg font-shortly text-base pt-8 text-shortly_grayishViolet bg-white mb-40 ">
+        <header className="mx-auto max-w-screen-lg font-shortly text-base pt-8 text-shortly_grayishViolet bg-white mb-40 md:h-fit h-screen  ">
           {/* --------------------------------------------- NavBar  -------------------------------------- */}
           <nav className=" flex justify-between f-fit items-center">
             <div className="flex justify-center gap-12">
-              <img src="images/logo.svg" alt="logo" />
-              <ul className="flex gap-6 font-bold   ">
+              <img className="md:ms-0 ms-10" src="images/logo.svg" alt="logo" />
+              <ul className=" gap-6 font-bold  md:flex hidden  ">
                 <li className="hover:text-shortly_VeryDarkBlue hover:cursor-pointer">
                   Features
                 </li>
@@ -21,33 +27,73 @@ function Layout(props) {
                 </li>
               </ul>
             </div>
-            <div className="flex gap-6 font-bold">
-              <button className="hover:text-shortly_VeryDarkViolet">Login</button>
+            <div className="md:flex hidden gap-6 font-bold">
+              <button className="hover:text-shortly_VeryDarkViolet">
+                Login
+              </button>
               <button className=" bg-shortly_pr_cyan rounded-3xl text-white px-4 py-2 hover:bg-shortly_pr_cyan/[0.6]">
                 Sign up
               </button>
             </div>
+            <div
+              className="md:hidden block me-10 hover:cursor-pointer"
+              onClick={toggelMobileMenu}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="2em"
+                viewBox="0 0 448 512"
+                style={{ fill: "#96a0b0" }}
+              >
+                <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+              </svg>
+            </div>
           </nav>
+          {/* --------------------------------------------- Mobile menu  -------------------------------------- */}
+
+          <div
+            className={`${mobileMenu? "absolute": "hidden"} md:hidden flex flex-col justify-center gap-10 items-center  font-bold font-shortly text-white  w-5/6 rounded-xl py-6 top-20 bg-shortly_pr_darkViolet z-50 mx-10 $`}
+          >
+            <ul className="flex flex-col gap-8 text-center border-b-2 border-shortly_ntrl_gray w-4/5 py-4">
+              <li className="hover:text-shortly_pr_cyan hover:cursor-pointer">
+                Features
+              </li>
+              <li className="hover:text-shortly_pr_cyan hover:cursor-pointer">
+                Pricing
+              </li>
+              <li className="hover:text-shortly_pr_cyan hover:cursor-pointer">
+                Resources
+              </li>
+            </ul>
+            <div className="flex flex-col gap-4 text-center w-4/5 ">
+              <button className="hover:border hover:border-shortly_pr_cyan hover:rounded-2xl py-2 border border-shortly_pr_darkViolet">
+                Login
+              </button>
+              <button className="bg-shortly_pr_cyan hover:bg-shortly_pr_cyan/[0.7] py-2 rounded-3xl">
+                Sign Up
+              </button>
+            </div>
+          </div>
 
           {/* --------------------------------------------- Hero  -------------------------------------- */}
-          <div className=" flex justify-between mt-16 h-[400px] ">
+          <div className=" flex md:flex-row md:gap-0 gap-8 flex-col justify-between mt-16 h-[400px] ">
             <div className="flex flex-col justify-center items-start w- gap-6">
-              <h1 className="text-6xl font-extrabold w-full text-shortly_VeryDarkBlue ">
+              <h1 className="md:text-6xl font-extrabold md:w-full w-4/5 md:text-start text-center mx-auto text-5xl text-shortly_VeryDarkBlue ">
                 More than just shorter links
               </h1>
-              <p>
+              <p className="md:w-full w-4/5 md:text-start text-center mx-auto">
                 Build your brand’s recognition and get detailed insights on how
                 your links are performing.
               </p>
-              <button className=" text-bold text-white bg-shortly_pr_cyan hover:bg-shortly_pr_cyan/[0.7] hover:cursor-pointer py-2 px-6 rounded-3xl">
+              <button className="mx-auto text-bold text-white bg-shortly_pr_cyan hover:bg-shortly_pr_cyan/[0.7] hover:cursor-pointer py-2 px-6 rounded-3xl">
                 Get Started
               </button>
             </div>
-            <div className="flex justify-center items-center  ">
+            <div className="flex justify-center items-center  order-first md:order-last md:overflow-visible overflow-x-clip  ">
               <img
                 src="images/illustration-working.svg"
                 alt="illustration"
-                className="relative -right-[150px] w-[1000px]"
+                className="relative md:-right-[150px] md:w-[1000px] w-5/6    "
               />
             </div>
           </div>
@@ -59,69 +105,82 @@ function Layout(props) {
           <div className="mx-auto max-w-screen-lg">{props.children}</div>
 
           {/* --------------------------------------------- Statics  -------------------------------------- */}
-          <div className="mx-auto max-w-screen-lg py-20 flex flex-col items-center h-full ">
+          <div className="mx-auto  max-w-screen-lg md:py-20 pt-12 md:gap-2 gap-4  flex flex-col items-center ">
             <h2 className=" text-4xl font-extrabold text-shortly_VeryDarkBlue">
               {" "}
               Advanced Statistics
             </h2>
-            <p className="text-center text-lg text-shortly_grayishViolet font-medium">
+            <p className="md:block hidden text-center text-lg text-shortly_grayishViolet font-medium md:mx-0 mx-10">
               {" "}
               Track how your links are performing across the web with our
               <br />
               advanced statistics dashboard.
             </p>
-            {/* --------------------------------------------- Cards horizental line  -------------------------------------- */}
+            <p className="md:hidden block text-center md:text-lg text-2xl text-shortly_grayishViolet font-medium md:mx-0 mx-10">
+              {" "}
+              Track how your links are performing
+              <br />
+              across the web with our advanced
+              <br />
+              statistics dashboard.
+            </p>
+            {/* --------------------------------------------- Cards horizental line (desktop)   -------------------------------------- */}
+            <div className="h-2 w-full relative top-60  bg-shortly_pr_cyan md:block hidden"></div>
 
-            <div className="h-2 w-full relative top-60  bg-shortly_pr_cyan"></div>
             {/* --------------------------------------------- Cards   -------------------------------------- */}
-            <div className="flex gap-6 justify-between">
-              <div className="w-1/3 z-10">
-                <div className="bg-shortly_pr_darkViolet p-5 rounded-full text-center w-fit relative left-8 -bottom-10  ">
-                  <img src="images/icon-brand-recognition.svg" alt="" />
+            <div className="flex">
+              {/* --------------------------------------------- Cards vertical line (mobile) -------------------------------------- */}
+              <div className="h-screen w-3  relative  left-1/2 top-12 block  bg-shortly_pr_cyan md:hidden  "></div>
+              <div className="flex md:flex-row flex-col gap-6 justify-between relative md:-top-0  h-fit">
+                <div className="md:w-1/3 z-10 mx-10 md:mx-0">
+                  <div className="bg-shortly_pr_darkViolet p-5 rounded-full text-center w-[75px] relative md:left-8 left-[calc(50%-37.5px)] -bottom-10  ">
+                    <img src="images/icon-brand-recognition.svg" alt="" />
+                  </div>
+                  <div className="bg-white p-5 rounded-md ">
+                    <h3 className="mt-8 mb-4 font-extrabold text-lg font-shortly">
+                      {" "}
+                      Brand Recognition
+                    </h3>
+                    <p className=" text-shortly_grayishViolet font-medium">
+                      Boost your brand recognition with each click. Generic
+                      links don’t mean a thing. Branded links help instil
+                      confidence in your content.
+                    </p>
+                  </div>
                 </div>
-                <div className="bg-white p-5 rounded-md ">
-                  <h3 className="mt-8 mb-4 font-extrabold text-lg font-shortly">
-                    {" "}
-                    Brand Recognition
-                  </h3>
-                  <p className=" text-shortly_grayishViolet font-medium">
-                    Boost your brand recognition with each click. Generic links
-                    don’t mean a thing. Branded links help instil confidence in
-                    your content.
-                  </p>
-                </div>
-              </div>
 
-              <div className="w-1/3 relative top-12 ">
-                <div className="bg-shortly_pr_darkViolet p-5 rounded-full text-center w-fit relative left-8 -bottom-10  ">
-                  <img src="images/icon-detailed-records.svg" alt="" />
+                <div className="md:w-1/3 z-10 mx-10 md:mx-0 relative md:top-12 ">
+                  <div className="bg-shortly_pr_darkViolet p-5 rounded-full text-center w-[75px] relative md:left-8 left-[calc(50%-37.5px)] -bottom-10  ">
+                    <img src="images/icon-detailed-records.svg" alt="" />
+                  </div>
+                  <div className="bg-white p-5 rounded-md ">
+                    <h3 className="mt-8 mb-4 font-extrabold text-lg font-shortly">
+                      {" "}
+                      Detailed Records
+                    </h3>
+                    <p className=" text-shortly_grayishViolet font-medium">
+                      Gain insights into who is clicking your links. Knowing
+                      when and where people engage with your content helps
+                      inform better decisions.
+                    </p>
+                  </div>
                 </div>
-                <div className="bg-white p-5 rounded-md ">
-                  <h3 className="mt-8 mb-4 font-extrabold text-lg font-shortly">
-                    {" "}
-                    Detailed Records
-                  </h3>
-                  <p className=" text-shortly_grayishViolet font-medium">
-                    Gain insights into who is clicking your links. Knowing when
-                    and where people engage with your content helps inform
-                    better decisions.
-                  </p>
-                </div>
-              </div>
 
-              <div className="w-1/3 relative top-24 ">
-                <div className="bg-shortly_pr_darkViolet p-5 rounded-full text-center w-fit relative left-8 -bottom-10  ">
-                  <img src="images/icon-fully-customizable.svg" alt="" />
-                </div>
-                <div className="bg-white p-5 rounded-md ">
-                  <h3 className="mt-8 mb-4 font-extrabold text-lg font-shortly">
-                    {" "}
-                    Fully Customizable
-                  </h3>
-                  <p className=" text-shortly_grayishViolet font-medium">
-                    Improve brand awareness and content discoverability through
-                    customizable links, supercharging audience engagement.
-                  </p>
+                <div className="md:w-1/3 z-10 mx-10 md:mx-0 relative md:top-24 ">
+                  <div className="bg-shortly_pr_darkViolet p-5 rounded-full text-center w-[75px] relative md:left-8 left-[calc(50%-37.5px)] -bottom-10  ">
+                    <img src="images/icon-fully-customizable.svg" alt="" />
+                  </div>
+                  <div className="bg-white p-5 rounded-md ">
+                    <h3 className="mt-8 mb-4 font-extrabold text-lg font-shortly">
+                      {" "}
+                      Fully Customizable
+                    </h3>
+                    <p className=" text-shortly_grayishViolet font-medium">
+                      Improve brand awareness and content discoverability
+                      through customizable links, supercharging audience
+                      engagement.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -135,7 +194,7 @@ function Layout(props) {
               backgroundImage: "url('images/bg-boost-desktop.svg')",
             }}
           >
-            <h2 className="text-white font-shortly text-5xl font-bold">
+            <h2 className="text-white font-shortly md:text-5xl text-4xl font-bold">
               {" "}
               Boost your links today{" "}
             </h2>
@@ -147,7 +206,7 @@ function Layout(props) {
         </main>
         {/* --------------------------------------------- Footer   -------------------------------------- */}
         <div className="bg-shortly_VeryDarkViolet ">
-          <div className="flex justify-between mx-auto max-w-screen-lg py-12 ">
+          <div className="flex md:flex-row flex-col justify-between items-center md:gap-0 gap-12 mx-auto max-w-screen-lg py-12 ">
             {/* --------------------------------------------- LOGO   -------------------------------------- */}
             <div>
               <svg xmlns="http://www.w3.org/2000/svg" width="121" height="33">
@@ -158,7 +217,7 @@ function Layout(props) {
               </svg>
             </div>
             {/* --------------------------------------------- Pages   -------------------------------------- */}
-            <div className="flex text-white justify-around w-1/2">
+            <div className="flex text-white md:justify-around md:flex-row md:items-start text-center md:text-start md:gap-0 gap-6 items-center flex-col  w-1/2">
               <div>
                 <h4 className="font-bold text-xl mb-4 ">Features</h4>
                 <ul className="flex flex-col gap-2 text-normal text-shortly_grayishViolet ">
@@ -206,7 +265,7 @@ function Layout(props) {
               </div>
             </div>
             {/* --------------------------------------------- Social Links   -------------------------------------- */}
-            <div className="flex justify-around w-1/6">
+            <div className="flex justify-around w-1/6 md:gap-0 gap-8">
               <div className="group hover:cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
                   <path

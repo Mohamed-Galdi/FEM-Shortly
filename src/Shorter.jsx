@@ -51,19 +51,19 @@ function Shorter() {
     }, 5000);
   };
 
-  https: return (
-    <div>
+  return (
+    <div className="mx-auto md:max-w-screen-xl max-w-screen-sm ">
       <div
-        className="mt-20 px-16 bg-shortly_pr_darkViolet h-[150px] rounded-3xl relative -top-[75px] bg-cover bg-center w-full flex justify-around gap-4 items-center"
+        className="mt-20 md:px-16 md:mx-0  bg-shortly_pr_darkViolet md:h-[150px] h-[200px] rounded-3xl relative -top-[75px] bg-cover bg-center w-full flex justify-around md:gap-4 items-center md:flex-row flex-col "
         style={{
           backgroundImage: "url('images/bg-shorten-desktop.svg')",
         }}
       >
-        <div className="w-10/12">
+        <div className="w-10/12 md:mx-0 mx-10">
           <p
             className={`${
               wrongInput === 1
-                ? "text-red-500 absolute top-3 text-lg font-shortly font-bold left-24"
+                ? "text-red-500 absolute md:top-3 top-[85px] text-lg font-shortly font-bold md:left-24"
                 : "hidden"
             } `}
           >
@@ -83,7 +83,7 @@ function Shorter() {
 
         <button
           onClick={shortLink}
-          className="w-2/12 bg-shortly_pr_cyan hover:bg-[#73d8d7] hover:cursor-pointer px-6 py-2 rounded-xl text-white font-bold font-shortly h-16 text-lg"
+          className="md:w-2/12 w-10/12 bg-shortly_pr_cyan hover:bg-[#73d8d7] hover:cursor-pointer px-6 py-2 rounded-xl text-white font-bold font-shortly h-16 text-lg"
         >
           {" "}
           Shorten It!
@@ -95,11 +95,11 @@ function Shorter() {
           {linksArray.map((link, index) => (
             <div
               key={index}
-              className=" flex bg-white mb-2 px-4 py-6 rounded-md justify-between items-center "
+              className=" flex md:flex-row flex-col  bg-white mb-2 px-4 py-6 rounded-md justify-between items-center "
             >
-              <p className="mx-4">{link.longLink}</p>
-              <div className="flex gap-8 items-center">
-                <p className="mx-4 text-shortly_pr_cyan">{link.shortenLink}</p>
+              <p className="mx-4 md:border-b-0 border-b-2 pb-2 md:pb-0 w-full overflow-hidden">{link.longLink}</p>
+              <div className="flex md:gap-8 gap-4  md:my-0 my-2 items-start md:items-center md:flex-row flex-col w-full">
+                <p className="md:mx-4 text-shortly_pr_cyan text-start">{link.shortenLink}</p>
                 <button
                   onClick={() => {
                     handleCopy(index, link.shortenLink);
@@ -108,7 +108,7 @@ function Shorter() {
                     copiedIndex === index
                       ? "bg-shortly_pr_darkViolet hover:bg-shortly_pr_darkViolet/[0.7] px-4"
                       : "bg-shortly_pr_cyan hover:bg-shortly_pr_cyan/[0.7] px-7"
-                  } mx-6  py-2 rounded-xl text-white`}
+                  } md:mx-6  py-2 rounded-xl text-white w-full`}
                 >
                   {copiedIndex === index ? "Copied!" : "Copy"}
                 </button>
